@@ -1,0 +1,100 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/brands';
+@import '~@fortawesome/fontawesome-free/scss/v4-shims';
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+// Animate.css
+@import '~animate.css';
+
+$primary: #fff;
+$secondary: $red;
+
+body {
+    padding: 58px 0 58px;
+}
+.cover {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+}
+.fab {
+    font-weight: 700;
+    bottom: 80px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50% !important;
+    position: fixed;
+    display: flex;
+    z-index: 1030;
+    align-items: center;
+    justify-content: center;
+}
+header {
+    transition: top 0.25s;
+    background: #fff;
+    .app-navbar {
+        background: $primary;
+        height: 58px;
+        .dropdown-menu {
+            left: unset!important;
+            right: -5px!important;
+            transform: translate(0, 2px)!important;
+        }
+    }
+    .tabbed-nav {
+        background: $primary;
+        .nav-link {
+            position: relative;
+            color: #212529;
+            flex: 1 1 auto!important;
+            text-align: center;
+            &.active {
+                color: $secondary!important;
+                &::after {
+                    content: '';
+                    background: $secondary;
+                    height: 2px;
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                }
+            }
+        }
+    }
+}
+.member-list {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    .member-item {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        &:hover {
+            background: #f5f5f5;
+        }
+    }
+}
+.bottom-nav {
+    box-shadow: 0 -0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+    a {
+        padding: 8px 0 5px;
+        color: inherit;
+        &.active {
+            color: $secondary;
+        }
+        &:hover {
+            background: #eee;
+            text-decoration: none;
+        }
+    }
+}
