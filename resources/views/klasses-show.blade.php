@@ -60,6 +60,24 @@
             </div>
         @endif
 
+        @can('update', $klass)
+            <div class="px-4 mb-5">
+                <form action="{{ route('klass.out') }}" method="POST" class="mb-2">
+                    @csrf
+                    @method('PUT')
+                    <input type="hidden" name="klass_id" value="{{ $klass->id }}">
+                    <button type="button" class="btn btn-dark btn-block" id="out">Keluar Kelas</button>
+                </form>
+                <a href="{{ route('klass.edit', ['code' => $klass->code]) }}" class="btn btn-primary btn-block mb-2">Edit Informasi</a>
+                <form action="{{ route('klass.delete') }}" method="POST">
+                    @csrf
+                    @method('delete')
+                    <input type="hidden" name="klass_id" value="{{ $klass->id }}">
+                    <button type="button" class="btn btn-danger btn-block" id="delete">Hapus Kelas</button>
+                </form>
+            </div>
+        @endcan
+
         <h3 class="small text-uppercase mb-3 pl-4 font-weight-bold text-muted">Daftar Anggota</h3>
         <ol class="member-list list-unstyled">
             @foreach ($klass->users as $user)
