@@ -55,16 +55,20 @@
             <div class="px-4 mb-5">
                 <h3 class="small text-uppercase mb-3 font-weight-bold text-muted">Deskripsi</h3>
                 <p class="description">
-                    {{ $klass->description }}
+                    @php
+                        $config = HTMLPurifier_Config::createDefault();
+                        $purifier = new HTMLPurifier($config);
+                        $klass_description = $purifier->purify(nl2br($klass->description));
+                    @endphp
+                    {!! $klass_description !!}
                 </p>
             </div>
         @endif
 
         @can('update', $klass)
             <div class="px-4 mb-5">
-                <form action="{{ route('klass.out') }}" method="POST" class="mb-2">
+                <form action="{{ route('klass.out', ['id' => $klass->id]) }}" method="POST" class="mb-2">
                     @csrf
-                    @method('PUT')
                     <input type="hidden" name="klass_id" value="{{ $klass->id }}">
                     <button type="button" class="btn btn-dark btn-block" id="out">Keluar Kelas</button>
                 </form>
@@ -235,6 +239,18 @@
             $(this).parents('form').submit()
         })
 
+        $('#out').click(function() {
+            if (confirm('Apakah Anda yakin ingin keluar dari kelas ini?')) {
+                $(this).parents('form').submit()
+            }
+        })
+
+        $('#delete').click(function() {
+            if (prompt('Silakan ketik "HAPUS" lalu tekan OK untuk menghapus kelas ini.') == 'HAPUS') {
+                $(this).parents('form').submit()
+            }
+        })
+
         let clipboard = new ClipboardJS('.btn')
 
         clipboard.on('success', function(e) {
@@ -244,7 +260,6 @@
 
             setTimeout(() => { target.tooltip('hide') }, 1000);
         });
-
 
     </script>
 @endpush
