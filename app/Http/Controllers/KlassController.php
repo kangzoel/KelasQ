@@ -246,12 +246,14 @@ class KlassController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $code
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($code)
     {
-        //
+        $klass = Klass::where('code', $code)->first();
+
+        return view('klasses-edit', ['klass' => $klass]);
     }
 
     /**
@@ -263,7 +265,26 @@ class KlassController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|min:1|max:65530',
+            'description' => 'max:65530',
+            'default_member_role_id' => 'required|integer|min:1|max:4',
+        ]);
+
+        $user = Auth::user();
+        $klass = Klass::find($id);
+
+        if ($user->cant('update', $klass)) return abort(403);
+
+        $klass->name = $validatedData['name'];
+        $klass->description = $validatedData['description'];
+        $klass->default_member_role_id = $validatedData['default_member_role_id'];
+        $klass->save();
+
+        return redirect('classes/' . $klass->code)->with('message', [
+            'type' => 'success',
+            'content' => 'Informasi kelas berhasil diubah.'
+        ]);
     }
 
     /**
