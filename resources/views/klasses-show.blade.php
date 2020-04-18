@@ -22,7 +22,7 @@
 
         @can('update', $klass)
             <div class="px-4 mb-5">
-                <h3 class="small text-uppercase mb-3 font-weight-bold text-muted ">Peran calon member</h3>
+                <h3 class="small text-uppercase mb-3 font-weight-bold text-muted ">Peran calon anggota</h3>
                 <form action="{{ route('klass.set_default_role', ['code' => $klass->code]) }}" method="POST">
                     @csrf
                     @method('put')
