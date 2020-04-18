@@ -21,8 +21,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/classes', 'KlassController@index')->name('klass');
     Route::get('/classes/create', 'KlassController@create')->name('klass.create');
     Route::get('/classes/{code}', 'KlassController@show')->name('klass.show');
-    Route::get('/classes/{code}/schedules', 'KlassController@tasks')->name('klass.tasks');
-    Route::get('/classes/{code}/tasks', 'KlassController@schedules')->name('klass.schedules');
+    Route::get('/classes/{code}/tasks', 'KlassController@tasks')->name('klass.tasks');
+    Route::get('/classes/{code}/schedules', 'KlassController@schedules')->name('klass.schedules');
     Route::get('/classes/{code}/bills', 'KlassController@bills')->name('klass.bills');
     Route::get('/tasks', 'TaskController@index');
 
