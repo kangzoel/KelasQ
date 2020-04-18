@@ -236,6 +236,16 @@ class KlassController extends Controller
 
     public function destroy($id)
     {
-        //
+        $user = Auth::user();
+        $klass = Klass::find($id);
+
+        if ($user->cant('update', $klass)) return abort(403);
+
+        $klass->delete();
+
+        return redirect(route('klass'))->with('message', [
+            'type' => 'success',
+            'content' => "Kelas $klass->name berhasil dihapus"
+        ]);
     }
 }

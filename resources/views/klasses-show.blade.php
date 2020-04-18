@@ -73,7 +73,7 @@
                     <button type="button" class="btn btn-dark btn-block" id="out">Keluar Kelas</button>
                 </form>
                 <a href="{{ route('klass.edit', ['code' => $klass->code]) }}" class="btn btn-primary btn-block mb-2">Edit Informasi</a>
-                <form action="{{ route('klass.delete') }}" method="POST">
+                <form action="{{ route('klass.destroy', ['id' => $klass->id]) }}" method="POST">
                     @csrf
                     @method('delete')
                     <input type="hidden" name="klass_id" value="{{ $klass->id }}">
@@ -246,8 +246,11 @@
         })
 
         $('#delete').click(function() {
-            if (prompt('Silakan ketik "HAPUS" lalu tekan OK untuk menghapus kelas ini.') == 'HAPUS') {
+            let hapus = prompt('Silakan ketik "HAPUS" lalu tekan OK untuk menghapus kelas ini.')
+            if (hapus == 'HAPUS') {
                 $(this).parents('form').submit()
+            } else if (hapus !== null) {
+                alert('Hapus ditabalkan. Pastikan anda mengetik "HAPUS" (huruf kapital semua) untuk menghapus kelas.');
             }
         })
 

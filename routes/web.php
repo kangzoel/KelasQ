@@ -33,7 +33,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('/classes/{code}/change_role', 'KlassController@change_role')->name('klass.change_role');
     Route::put('/classes/{code}/set_default_role', 'KlassController@set_default_role')->name('klass.set_default_role');
     Route::put('/classes/{id}/update', 'KlassController@update')->name('klass.update'); // TODO
-    Route::delete('/classes/delete', 'KlassController@delete')->name('klass.delete'); // TODO
+    Route::delete('/classes/{id}/destroy', 'KlassController@destroy')->name('klass.destroy'); // TODO
     Route::delete('/classes/{code}/kick', 'KlassController@kick')->name('klass.kick');
     Route::delete('/classes/{code}/ban', 'KlassController@ban')->name('klass.ban');
 });
