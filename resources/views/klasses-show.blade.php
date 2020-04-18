@@ -55,12 +55,7 @@
             <div class="px-4 mb-5">
                 <h3 class="small text-uppercase mb-3 font-weight-bold text-muted">Deskripsi</h3>
                 <p class="description">
-                    @php
-                        $config = HTMLPurifier_Config::createDefault();
-                        $purifier = new HTMLPurifier($config);
-                        $klass_description = $purifier->purify(nl2br($klass->description));
-                    @endphp
-                    {!! $klass_description !!}
+                    {!! \App\XSS::clean($klass->description) !!}
                 </p>
             </div>
         @endif
