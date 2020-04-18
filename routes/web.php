@@ -29,7 +29,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::post('/classes/store', 'KlassController@store')->name('klass.store');
     Route::post('/classes/join', 'KlassController@join')->name('klass.join');
-    Route::post('/classes/out', 'KlassController@out')->name('klass.out'); // TODO
+    Route::post('/classes/{id}/out', 'KlassController@out')->name('klass.out'); // TODO
     Route::put('/classes/{code}/change_role', 'KlassController@change_role')->name('klass.change_role');
     Route::put('/classes/{code}/set_default_role', 'KlassController@set_default_role')->name('klass.set_default_role');
     Route::put('/classes/{id}/update', 'KlassController@update')->name('klass.update'); // TODO

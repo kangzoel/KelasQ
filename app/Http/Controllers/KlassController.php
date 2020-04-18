@@ -11,11 +11,6 @@ use Illuminate\Http\Response;
 
 class KlassController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $user = Auth::user();
@@ -27,22 +22,11 @@ class KlassController extends Controller
         return view('klasses', $data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('klasses-create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -78,12 +62,6 @@ class KlassController extends Controller
         return base_convert(rand(1679616, 101559956668415), 10, 36);
     }
 
-    /**
-     * Join a class
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function join(Request $request)
     {
         $request->validate([
@@ -111,12 +89,22 @@ class KlassController extends Controller
         ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $code
-     * @return \Illuminate\Http\Response
-     */
+    public function out($id)
+    {
+        $user = Auth::user();
+        $klass = Klass::find($id);
+
+        UserKlass::where(['user_npm' => $user->npm, 'klass_id' => $id])->delete();
+        if (UserKlass::where(['klass_id' => $id])->count() == 0) {
+            Klass::find($id)->delete();
+        }
+
+        return redirect(route('klass'))->with('message', [
+            'type' => 'success',
+            'content' => "Anda berhasil keluar dari kelas $klass->name."
+        ]);
+    }
+
     public function show($code)
     {
         $user = Auth::user();
@@ -127,13 +115,6 @@ class KlassController extends Controller
         return view('klasses-show', ['klass' => $klass]);
     }
 
-    /**
-     * Set member's default role in a class
-     *
-     * @param  int  $code
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function set_default_role($code, Request $request)
     {
         $validatedData = $request->validate([
@@ -156,13 +137,6 @@ class KlassController extends Controller
         ]);
     }
 
-    /**
-     * Change user's role by class
-     *
-     * @param  int  $code
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function change_role($code, Request $request)
     {
         $validatedData = $request->validate([
@@ -185,13 +159,6 @@ class KlassController extends Controller
         ]);
     }
 
-    /**
-     * Kick user from a class
-     *
-     * @param  int  $code
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function kick($code, Request $request)
     {
         $validatedData = $request->validate([
@@ -213,13 +180,6 @@ class KlassController extends Controller
         ]);
     }
 
-    /**
-     * Ban user from a class
-     *
-     * @param  int  $code
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function ban($code, Request $request)
     {
         $validatedData = $request->validate([
@@ -243,12 +203,6 @@ class KlassController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $code
-     * @return \Illuminate\Http\Response
-     */
     public function edit($code)
     {
         $klass = Klass::where('code', $code)->first();
@@ -256,13 +210,6 @@ class KlassController extends Controller
         return view('klasses-edit', ['klass' => $klass]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
@@ -287,12 +234,6 @@ class KlassController extends Controller
         ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //
