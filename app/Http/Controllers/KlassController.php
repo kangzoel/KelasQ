@@ -205,7 +205,10 @@ class KlassController extends Controller
 
     public function edit($code)
     {
+        $user = Auth::user();
         $klass = Klass::where('code', $code)->first();
+
+        if ($user->cant('update', $klass)) return abort(403);
 
         return view('klasses-edit', ['klass' => $klass]);
     }
