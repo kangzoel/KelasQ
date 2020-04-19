@@ -6,6 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ config('app.name') }}</title>
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <style>
+        body {
+            padding: 0
+        }
+    </style>
 </head>
 <body>
     <nav>
