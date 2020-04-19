@@ -10,15 +10,24 @@
         body {
             padding: 0
         }
+        #app {
+            height: 100vh
+        }
+        p {
+            line-height: 1.60em!important
+        }
     </style>
 </head>
 <body>
-    <nav>
-        <a href="/login">Masuk</a>
-        <a href="/register">Daftar</a>
-    </nav>
-    <h1>{{ config('app.name') }}</h1>
-    <p>Homepage</p>
+    <div id="app" class="d-flex flex-column align-items-center justify-content-center">
+        <img src="{{ asset('img/Logo.png') }}" alt="Logo KelasQ">
+        <h1 class="mt-2 font-weight-bold sr-only">{{ config('app.name') }}</h1>
+        <p class="h5 px-5 mt-2 text-center mb-3">Aplikasi manajemen kelas mahasiswa</p>
+        <nav>
+            <a href="/login" class="btn btn-primary mr-2">Masuk</a>
+            <a href="/register" class="btn btn-outline-primary">Daftar</a>
+        </nav>
+    </div>
     <script src="{{ mix('js/app.js') }}"></script>
 </body>
 </html>
