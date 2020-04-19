@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Masuk | ' . config('app.name'))
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
