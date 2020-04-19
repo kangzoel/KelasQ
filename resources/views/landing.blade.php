@@ -16,16 +16,19 @@
         p {
             line-height: 1.60em!important
         }
+        h1 {
+            font-size: 43px;
+        }
     </style>
 </head>
 <body>
     <div id="app" class="d-flex flex-column align-items-center justify-content-center">
         <img src="{{ asset('img/Logo.png') }}" alt="Logo KelasQ">
-        <h1 class="mt-2 font-weight-bold sr-only">{{ config('app.name') }}</h1>
-        <p class="h5 px-5 mt-2 text-center mb-3">Aplikasi manajemen kelas mahasiswa</p>
+        <h1 class="font-weight-bold mb-1">{{ config('app.name') }}</h1>
+        <p class="h5 px-5 text-center mb-3">Aplikasi manajemen kelas mahasiswa</p>
         <nav>
-            <a href="/login" class="btn btn-primary mr-2">Masuk</a>
-            <a href="/register" class="btn btn-outline-primary">Daftar</a>
+            <a href="/login" class="btn btn-dark mr-2">Masuk</a>
+            <a href="/register" class="btn btn-outline-dark">Daftar</a>
         </nav>
     </div>
     <script src="{{ mix('js/app.js') }}"></script>
