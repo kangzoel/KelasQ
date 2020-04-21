@@ -18,7 +18,7 @@ class CreateTasksTable extends Migration
             $table->unsignedBigInteger('subject_id')->index();
             $table->string('name');
             $table->text('description');
-            $table->timestamp('deadline');
+            $table->dateTime('deadline');
 
             $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
         });

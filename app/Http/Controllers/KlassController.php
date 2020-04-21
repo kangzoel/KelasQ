@@ -8,7 +8,6 @@ use App\UserKlass;
 use App\Klass;
 use App\KlassBlock;
 use App\UserSubject;
-use Illuminate\Http\Response;
 
 class KlassController extends Controller
 {

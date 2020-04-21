@@ -91,6 +91,22 @@
             </form>
         </div>
 
+        <div class="px-4 mb-5">
+            <form action="{{ route('klass.out', ['id' => $klass->id]) }}" method="POST" class="mb-2">
+                @csrf
+                <input type="hidden" name="klass_id" value="{{ $klass->id }}">
+                <button type="button" class="btn btn-outline-danger btn-block" id="out">Keluar Kelas</button>
+            </form>
+            @can('update', $klass)
+                <form action="{{ route('klass.destroy', ['id' => $klass->id]) }}" method="POST">
+                    @csrf
+                    @method('delete')
+                    <input type="hidden" name="klass_id" value="{{ $klass->id }}">
+                    <button type="button" class="btn btn-danger btn-block" id="delete">Hapus Kelas</button>
+                </form>
+            @endcan
+        </div>
+
         <h3 class="small text-uppercase mb-3 pl-4 font-weight-bold text-muted">Daftar Anggota</h3>
         <ol class="member-list list-unstyled">
             @foreach ($klass->users as $user)

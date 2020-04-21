@@ -10,6 +10,11 @@ class Subject extends Model
 
     public function tasks()
     {
-        return $this->hasMany('App\Comment', 'foreign_key', 'local_key');
+        return $this->hasMany('App\Task');
+    }
+
+    public function klass()
+    {
+        return $this->belongsTo('App\Klass');
     }
 }

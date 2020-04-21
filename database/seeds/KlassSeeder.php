@@ -23,7 +23,9 @@ class KlassSeeder extends Seeder
             ->create()
             ->each(function($klass) {
                 // Admin seeder
-                $admin = factory(User::class)->create();
+                $admin = factory(User::class)->create([
+                    'email' => 'admin@admin.com'
+                ]);
 
                 $admin_klass = new UserKlass;
                 $admin_klass->klass_id = $klass->id;
@@ -32,7 +34,9 @@ class KlassSeeder extends Seeder
                 $admin_klass->save();
 
                 // Secretary seeder
-                $secretary = factory(User::class)->create();
+                $secretary = factory(User::class)->create([
+                    'email' => 'secretary@secretary.com'
+                ]);
                 $secretary_klass = new UserKlass;
                 $secretary_klass->klass_id = $klass->id;
                 $secretary_klass->user_npm = $secretary->npm;
@@ -40,7 +44,9 @@ class KlassSeeder extends Seeder
                 $secretary_klass->save();
 
                 // Treasurer seeder
-                $treasurer = factory(User::class)->create();
+                $treasurer = factory(User::class)->create([
+                    'email' => 'treasurer@treasurer.com'
+                ]);
                 $treasurer_klass = new UserKlass;
                 $treasurer_klass->klass_id = $klass->id;
                 $treasurer_klass->user_npm = $treasurer->npm;
@@ -48,7 +54,9 @@ class KlassSeeder extends Seeder
                 $treasurer_klass->save();
 
                 // Regular member seeder
-                $regular_member = factory(User::class)->create();
+                $regular_member = factory(User::class)->create([
+                    'email' => 'member@member.com'
+                ]);
                 $regular_member_klass = new UserKlass;
                 $regular_member_klass->klass_id = $klass->id;
                 $regular_member_klass->user_npm = $regular_member->npm;

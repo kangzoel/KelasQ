@@ -16,7 +16,7 @@
         <a href="{{ route('klass.schedules', ['code' => $klass->code]) }}" class="nav-link{{ url()->current() == route('klass.schedules', ['code' => $klass->code]) ? ' active' : '' }}">
             Jadwal
         </a>
-        <a href="{{ route('klass.tasks', ['code' => $klass->code]) }}" class="nav-link{{ url()->current() == route('klass.tasks', ['code' => $klass->code]) ? ' active' : '' }}">
+        <a href="{{ route('task.show', ['klass_code' => $klass->code]) }}" class="nav-link{{ url()->current() == route('task.show', ['klass_code' => $klass->code]) ? ' active' : '' }}">
             Tugas
         </a>
         <a href="{{ route('klass.bills', ['code' => $klass->code]) }}" class="nav-link{{ url()->current() == route('klass.bills', ['code' => $klass->code]) ? ' active' : '' }}">
@@ -28,17 +28,6 @@
 @push('menu')
     @can('update', $klass)
         <a href="{{ route('klass.edit', ['code' => $klass->code]) }}" class="dropdown-item">Edit Informasi</a>
-        <form action="{{ route('klass.out', ['id' => $klass->id]) }}" method="POST">
-            @csrf
-            <input type="hidden" name="klass_id" value="{{ $klass->id }}">
-            <button type="button" class="dropdown-item" id="out">Keluar Kelas</button>
-        </form>
-        <form action="{{ route('klass.destroy', ['id' => $klass->id]) }}" method="POST">
-            @csrf
-            @method('delete')
-            <input type="hidden" name="klass_id" value="{{ $klass->id }}">
-            <button type="button" class="dropdown-item" id="delete">Hapus Kelas</button>
-        </form>
     @endcan
 @endpush
 

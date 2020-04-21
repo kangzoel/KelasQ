@@ -57,4 +57,16 @@ class KlassPolicy
             ? true
             : false;
     }
+
+    public function create_task(User $user, Klass $klass)
+    {
+        return UserKlass::where([
+            'user_npm' => $user->npm,
+            'klass_id' => $klass->id,
+        ])
+            ->whereIn('role_id', [1, 2])
+            ->exists()
+                ? true
+                : false;
+    }
 }

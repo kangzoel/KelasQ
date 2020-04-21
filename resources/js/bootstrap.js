@@ -13,6 +13,7 @@ try {
     require('bootstrap')
     require('clipboard/dist/clipboard.min')
     require('select2')
+    require('@chenfengyuan/datepicker')
 } catch (e) {}
 
 /**
