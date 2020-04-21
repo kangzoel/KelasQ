@@ -12,6 +12,7 @@ try {
 
     require('bootstrap')
     require('clipboard/dist/clipboard.min')
+    require('select2')
 } catch (e) {}
 
 /**

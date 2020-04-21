@@ -27,6 +27,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/classes/{code}/bills', 'KlassController@bills')->name('klass.bills');
     Route::get('/tasks', 'TaskController@index');
 
+    Route::post('/classes/{id}/follow_subject', 'KlassController@follow_subject')->name('klass.follow_subject');
     Route::post('/classes/store', 'KlassController@store')->name('klass.store');
     Route::post('/classes/join', 'KlassController@join')->name('klass.join');
     Route::post('/classes/{id}/out', 'KlassController@out')->name('klass.out');

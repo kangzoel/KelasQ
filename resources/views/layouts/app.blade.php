@@ -32,6 +32,7 @@
                             <i class="fas fa-ellipsis-v"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right border-0 shadow animated fadeInDown" aria-labelledby="navbarDropdown" style="animation-duration: 0.25s">
+                            @stack('menu')
                             <form action="/logout" method="POST">
                                 @csrf
                                 <button type="submit" class="dropdown-item">Keluar</button>

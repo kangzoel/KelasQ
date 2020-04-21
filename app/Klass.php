@@ -17,4 +17,9 @@ class Klass extends Model
     {
         return $this->hasManyThrough('App\User', 'App\UserKlass', 'klass_id', 'npm', NULL, 'user_npm')->orderBy('role_id', 'asc');
     }
+
+    public function subjects()
+    {
+        return $this->hasMany('App\Subject');
+    }
 }

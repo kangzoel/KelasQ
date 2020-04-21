@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\UserKlass;
 use App\Klass;
 use App\KlassBlock;
+use App\UserSubject;
 use Illuminate\Http\Response;
 
 class KlassController extends Controller
@@ -249,6 +250,38 @@ class KlassController extends Controller
         return redirect(route('klass'))->with('message', [
             'type' => 'success',
             'content' => "Kelas $klass->name berhasil dihapus"
+        ]);
+    }
+
+    public function follow_subject($id, Request $request)
+    {
+        $validatedData = $request->validate([
+            'subject_id' => 'required|exists:subjects,id'
+        ]);
+
+        $user = Auth::user();
+        $klass = Klass::find($id);
+
+        if ($user->cant('view', $klass)) return 403;
+
+        // Delete unselected subjects
+        foreach ($user->subjects as $existing_subject) {
+            if (!in_array($existing_subject->id, $validatedData['subject_id']))
+                UserSubject::where(['user_npm' => $user->npm, 'subject_id' => $existing_subject->id])
+                    ->delete();
+        }
+
+        // Add selected subjects if not exist
+        foreach ($validatedData['subject_id'] as $subject_id) {
+            UserSubject::firstOrCreate([
+                'user_npm' => $user->npm,
+                'subject_id' => $subject_id
+            ]);
+        }
+
+        return redirect(route('klass.show', ['code' => $klass->code]))->with('message', [
+            'type' => 'success',
+            'content' => 'Berhasil mengikuti mata kuliah'
         ]);
     }
 }

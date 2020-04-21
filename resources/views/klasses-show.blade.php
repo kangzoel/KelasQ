@@ -1,6 +1,8 @@
 @php
     use App\Role;
     use App\UserKlass;
+    use App\Subject;
+    use App\UserSubject;
 @endphp
 
 @extends('layouts.klass')
@@ -60,22 +62,34 @@
             </div>
         @endif
 
-        @can('update', $klass)
-            <div class="px-4 mb-5">
-                <form action="{{ route('klass.out', ['id' => $klass->id]) }}" method="POST" class="mb-2">
-                    @csrf
-                    <input type="hidden" name="klass_id" value="{{ $klass->id }}">
-                    <button type="button" class="btn btn-dark btn-block" id="out">Keluar Kelas</button>
-                </form>
-                <a href="{{ route('klass.edit', ['code' => $klass->code]) }}" class="btn btn-primary btn-block mb-2">Edit Informasi</a>
-                <form action="{{ route('klass.destroy', ['id' => $klass->id]) }}" method="POST">
-                    @csrf
-                    @method('delete')
-                    <input type="hidden" name="klass_id" value="{{ $klass->id }}">
-                    <button type="button" class="btn btn-danger btn-block" id="delete">Hapus Kelas</button>
-                </form>
-            </div>
-        @endcan
+        <div class="px-4 mb-5">
+            <h3 class="small text-uppercase mb-3 font-weight-bold text-muted">Ikuti Mata Kuliah</h3>
+            <form action="{{ route('klass.follow_subject', ['id' => $klass->id]) }}" method="post">
+                @csrf
+                <div class="form-group">
+                    <div class="input-group mb-3">
+                        <select class="form-control select2 @error('subject_id') is-invalid @enderror" name="subject_id[]" id="subject_id" multiple="multiple" data-placeholder="Pilih kelas">
+                            @foreach (Subject::where('klass_id', $klass->id)->get() as $subject)
+                                @php
+                                    $selected = UserSubject::where([
+                                        'user_npm' => Auth::user()->npm,
+                                        'subject_id' => $subject->id
+                                    ])->exists();
+
+                                    if (old('subject_id')) {
+                                        $selected = in_array($subject->id, old('subject_id'));
+                                    }
+                                @endphp
+                                <option value="{{ $subject->id }}" {{ $selected ? 'selected' : '' }} >{{ $subject->name }}</option>
+                            @endforeach
+                        </select>
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit">Simpan</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
 
         <h3 class="small text-uppercase mb-3 pl-4 font-weight-bold text-muted">Daftar Anggota</h3>
         <ol class="member-list list-unstyled">
@@ -232,21 +246,6 @@
 
         $('#default_member_role_id').change(function() {
             $(this).parents('form').submit()
-        })
-
-        $('#out').click(function() {
-            if (confirm('Apakah Anda yakin ingin keluar dari kelas ini?')) {
-                $(this).parents('form').submit()
-            }
-        })
-
-        $('#delete').click(function() {
-            let hapus = prompt('Silakan ketik "HAPUS" lalu tekan OK untuk menghapus kelas ini.')
-            if (hapus == 'HAPUS') {
-                $(this).parents('form').submit()
-            } else if (hapus !== null) {
-                alert('Hapus ditabalkan. Pastikan anda mengetik "HAPUS" (huruf kapital semua) untuk menghapus kelas.');
-            }
         })
 
         let clipboard = new ClipboardJS('.btn')
