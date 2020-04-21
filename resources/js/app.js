@@ -3,7 +3,7 @@ require('./bootstrap')
 $('.select2').select2()
 
 /* When the user scrolls down, hide the navbar. When the user scrolls up, show the navbar */
-const prevScrollpos = window.pageYOffset
+let prevScrollpos = window.pageYOffset
 
 window.onscroll = function () {
     const currentScrollPos = window.pageYOffset
