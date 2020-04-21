@@ -35,11 +35,13 @@
                                 </form>
                             </div>
                         @endcan
-                        <div class="clearfix"></div>
                     </div>
                     <h2 class="item-title h5">
                         <b>{{ $task->name }}</b>
                     </h2>
+                    <span class="badge badge-pill badge-dark text-white mb-3">
+                        <i class="fas fa-book mr-1"></i> {{ $task->subject->name }}
+                    </span>
                     <div class="item-detail small">{!! \App\XSS::clean(nl2br($task->description)) !!}</div>
                 </li>
             @endforeach
@@ -52,61 +54,6 @@
         </a>
     @endcan
 @endsection
-
-@push('styles')
-    <style>
-        .history-tl-container {
-            display:block;
-            position:relative;
-            line-height: 1.5em
-        }
-        .history-tl-container ul.tl {
-            margin:20px 0;
-            padding:0;
-            display:inline-block;
-        }
-        .history-tl-container ul.tl li {
-            list-style: none;
-            margin:auto;
-            margin-left:190px;
-            min-height: 260px;
-            /*background: rgba(255,255,0,0.1);*/
-            border-left:1px dashed #86D6FF;
-            padding:0 0 50px 30px;
-            position:relative;
-        }
-        .history-tl-container ul.tl li:last-child{ border-left:0;}
-        .history-tl-container ul.tl li::before {
-            position: absolute;
-            left: -10px;
-            content: " ";
-            border: 8px solid rgba(255, 255, 255, 0.74);
-            border-radius: 500%;
-            background: #258CC7;
-            height: 20px;
-            width: 20px;
-            transition: all 500ms ease-in-out;
-
-        }
-        .history-tl-container ul.tl li.active::before {
-            border-color:  #258CC7;
-            transition: all 1000ms ease-in-out;
-        }
-        ul.tl li .item-title {
-        }
-        ul.tl li .item-detail {
-            color: #444;
-            font-size: .9em
-        }
-        ul.tl li .timestamp {
-            color: #4a4a4a;
-            position: absolute;
-            width:150px;
-            left: -182px;
-            text-align: right;
-        }
-    </style>
-@endpush
 
 @push('scripts')
     <script>

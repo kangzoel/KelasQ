@@ -68,7 +68,7 @@
                 @csrf
                 <div class="form-group">
                     <div class="input-group mb-3">
-                        <select class="form-control select2 @error('subject_id') is-invalid @enderror" name="subject_id[]" id="subject_id" multiple="multiple" data-placeholder="Pilih kelas">
+                        <select class="form-control select2 @error('subject_id') is-invalid @enderror" name="subject_id[]" id="subject_id" multiple="multiple" data-placeholder="Pilih mata kuliah">
                             @foreach (Subject::where('klass_id', $klass->id)->get() as $subject)
                                 @php
                                     $selected = UserSubject::where([

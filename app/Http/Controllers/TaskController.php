@@ -12,7 +12,19 @@ class TaskController extends Controller
 {
     public function index()
     {
-        return view('tasks');
+        $user = Auth::user();
+
+        $tasks = Task::select('tasks.*')
+            ->join('subjects', 'tasks.subject_id', 'subjects.id')
+            ->join('user_subject', 'tasks.subject_id', 'user_subject.subject_id')
+            ->where('user_subject.user_npm', $user->npm)
+            ->orderBy('tasks.deadline', 'asc')
+            ->get();
+
+        return view('tasks', [
+            'tasks' => $tasks,
+            'user' => $user
+        ]);
     }
 
     public function create($klass_code)
@@ -59,8 +71,9 @@ class TaskController extends Controller
 
         if ($klass == NULL) abort(404);
 
-        $tasks = Task::join('subjects', 'tasks.subject_id','subjects.id')
-            ->select('tasks.*')
+        $tasks = Task::select('tasks.*')
+            ->join('subjects', 'tasks.subject_id','subjects.id')
+            ->where('subjects.klass_id', $klass->id)
             ->orderBy('deadline', 'asc')
             ->get();
 
