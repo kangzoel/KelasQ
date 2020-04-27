@@ -19,7 +19,7 @@
         <a href="{{ route('task.show', ['klass_code' => $klass->code]) }}" class="nav-link{{ url()->current() == route('task.show', ['klass_code' => $klass->code]) ? ' active' : '' }}">
             Tugas
         </a>
-        <a href="{{ route('klass.bills', ['code' => $klass->code]) }}" class="nav-link{{ url()->current() == route('klass.bills', ['code' => $klass->code]) ? ' active' : '' }}">
+        <a href="{{ route('bill.show', ['klass_code' => $klass->code]) }}" class="nav-link{{ url()->current() == route('bill.show', ['klass_code' => $klass->code]) ? ' active' : '' }}">
             Tagihan
         </a>
     </nav>

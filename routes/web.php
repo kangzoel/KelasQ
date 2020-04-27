@@ -21,6 +21,7 @@ Route::group(['middleware' => ['auth']], function () {
     // Dashboard
     Route::get('/classes', 'KlassController@index')->name('klass');
     Route::get('/tasks', 'TaskController@index');
+    Route::get('/bills', 'BillController@index');
 
     // Klass
     Route::get('/classes/create', 'KlassController@create')->name('klass.create');
@@ -52,5 +53,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/classes/{code}/schedules', 'KlassController@schedules')->name('klass.schedules');
 
     // Klass > bill
-    Route::get('/classes/{code}/bills', 'KlassController@bills')->name('klass.bills');
+    Route::get('/classes/bills', 'BillController@index')->name('bill');
+    Route::get('/classes/{klass_code}/bills', 'BillController@show')->name('bill.show');
 });
