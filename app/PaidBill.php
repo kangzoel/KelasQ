@@ -10,4 +10,7 @@ class PaidBill extends Model
     public function bills(){
         return $this->belongsTo('App\Bill');
     }
+    public function users(){
+        return $this->belongsTo('App\User');
+    }
 }
