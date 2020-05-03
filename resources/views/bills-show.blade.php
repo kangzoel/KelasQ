@@ -1,5 +1,6 @@
 @php
     use App\PaidBill;
+    use App\Bill;
 @endphp
 @extends('layouts.klass')
 

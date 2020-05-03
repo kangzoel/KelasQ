@@ -98,6 +98,7 @@ class BillController extends Controller
             ->join('klasses', 'bills.klass_id', 'klasses.id')
             ->join('user_klass', 'bills.klass_id', 'user_klass.klass_id')
             ->where('user_klass.user_npm', $user->npm)
+            ->where('bills.klass_id', $klass->id)
             ->orderBy('id','desc')
             ->get();
         $paid_bills = PaidBill::select('paid_bills.*')
