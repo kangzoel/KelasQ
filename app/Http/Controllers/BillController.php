@@ -58,7 +58,7 @@ class BillController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($klass_id, Request $request)
+    public function store($klass_code, Request $request)
     {
         $v = $request->validate([
             'name' => 'required',
@@ -68,16 +68,16 @@ class BillController extends Controller
         ]);
 
         $user = Auth::user();
-        $klass = Klass::find($klass_id)->first();
+        $klass = Klass::where('code', $klass_code)->first();
 
         $bill = new Bill();
-        $bill->klass_id = $klass_id;
+        $bill->klass_id = $klass->id;
         $bill->name = $v['name'];
         $bill->subject_id = $v['subject_id'];
         $bill->amount = $v['amount'];
         $bill->save();
 
-        return redirect(route('bill.show', ['klass_code' => $klass->code]))->with('message', [
+        return redirect(route('bill.show', ['klass_code' => $klass_code]))->with('message', [
             'type' => 'success',
             'content' => 'Tagihan berhasil dibuat'
         ]);
@@ -200,7 +200,7 @@ class BillController extends Controller
         return redirect(route('bill.show', ['klass_code' => $klass->code]))
             ->with('message', [
                 'type' => 'success',
-                'content' => 'Tugas berhasil dihapus'
+                'content' => 'Tagihan berhasil dihapus'
             ]);
 
     }

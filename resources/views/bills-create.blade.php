@@ -3,7 +3,7 @@
 @section('title','Buat Tagihan')
 
 @section('content')
-<form action="{{ route('bill.store', ['klass_id' => $klass->id]) }}" method="POST" class="py-4 px-4">
+<form action="{{ route('bill.store', ['klass_code' => $klass->code]) }}" method="POST" class="py-4 px-4">
     @csrf
     <div class="form-group">
         <label for="name">Nama Tagihan</label>
