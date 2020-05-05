@@ -61,4 +61,13 @@ Route::group(['middleware' => ['auth']], function () {
     // Klass > bill
     Route::get('/classes/bills', 'BillController@index')->name('bill');
     Route::get('/classes/{klass_code}/bills', 'BillController@show')->name('bill.show');
+    Route::get('/classes/{klass_code}/bills/create', 'BillController@create')->name('bill.create');
+    Route::post('/classes/{klass_id}/bills/store', 'BillController@store')->name('bill.store');
+    Route::get('/bills/{id}/info', 'BillController@info')->name('bill.info');
+    Route::get('/bills/{id}/edit', 'BillController@edit')->name('bill.edit');
+    Route::post('/bills/{id}/update', 'BillController@update')->name('bill.update');
+    Route::get('/bills/{id}/destroy', 'BillController@destroy')->name('bill.destroy');
+    Route::get('/bills/{id}/{npm}/paid', 'BillController@paid')->name('bill.paid');
+    Route::get('/bills/{paid_id}/{bill_id}/{npm}/unpaid', 'BillController@unpaid')->name('bill.unpaid');
+
 });

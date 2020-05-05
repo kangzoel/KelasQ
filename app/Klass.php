@@ -22,4 +22,8 @@ class Klass extends Model
     {
         return $this->hasMany('App\Subject');
     }
+    public function bill()
+    {
+        return $this->hasMany('App\Bill');
+    }
 }

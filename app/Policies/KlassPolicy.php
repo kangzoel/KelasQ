@@ -82,4 +82,24 @@ class KlassPolicy
                 ? true
                 : false;
     }
+    
+            
+    public function create_bill(User $user, Klass $klass)
+    {
+        return UserKlass::where([
+            'user_npm' => $user->npm,
+            'klass_id' => $klass->id
+        ])
+            ->whereIn('role_id', [1, 3])
+            ->exists()
+                ? true
+                : false;
+    }
+    
+    public function update_bill(User $user, Klass $klass)
+    {
+        return UserKlass::where(['user_npm' => $user->npm,'klass_id' => $klass->id, 'role_id' => 3])->exists()
+            ? true
+            : false;
+    }
 }
