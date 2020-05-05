@@ -69,4 +69,17 @@ class KlassPolicy
                 ? true
                 : false;
     }
+
+    public function schedule_update(User $user, Klass $schedule)
+    {
+        return $schedule->join('subjects', 'subjects.klass_id', 'klasses.id')
+            ->join('user_klass', 'subjects.klass_id', 'user_klass.klass_id')
+            ->where([
+                'user_klass.user_npm' => $user->npm
+            ])
+            ->whereIn('user_klass.role_id', [1, 2])
+            ->exists()
+                ? true
+                : false;
+    }
 }

@@ -38,7 +38,7 @@
                 $(this).parents('form').submit()
             }
         })
-
+        
         $('#delete').click(function() {
             let hapus = prompt('Silakan ketik "HAPUS" lalu tekan OK untuk menghapus kelas ini.')
             if (hapus == 'HAPUS') {
