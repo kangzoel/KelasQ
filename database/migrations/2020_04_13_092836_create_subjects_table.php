@@ -17,6 +17,7 @@ class CreateSubjectsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('klass_id')->index();
             $table->string('name');
+            $table->string('lecturer');
             $table->unsignedTinyInteger('day_of_week');
             $table->time('start');
             $table->time('end');

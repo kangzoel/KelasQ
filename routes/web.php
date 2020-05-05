@@ -22,6 +22,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/classes', 'KlassController@index')->name('klass');
     Route::get('/tasks', 'TaskController@index');
     Route::get('/bills', 'BillController@index');
+    Route::get('/schedules', 'KlassController@schedules_index');
 
     // Klass
     Route::get('/classes/create', 'KlassController@create')->name('klass.create');
@@ -50,7 +51,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::delete('/tasks/{id}/destroy', 'TaskController@destroy')->name('task.destroy');
 
     // Klass > schedule
-    Route::get('/classes/{code}/schedules', 'KlassController@schedules')->name('klass.schedules');
+    Route::get('/classes/{code}/schedules', 'KlassController@schedules_show')->name('klass.schedules');
+    Route::get('/classes/{klass_code}/schedules/create', 'KlassController@schedules_create')->name('klass.schedules_create');
+    Route::post('/classes/{klass_id}/schedules/store', 'KlassController@schedules_store')->name('klass.schedules_store');
+    Route::get('/classes/{id}/schedules/edit', 'KlassController@schedules_edit')->name('klass.schedules_edit');
+    Route::put('/clases/{id}/schedules/update', 'KlassController@schedules_update')->name('klass.schedules_update');
+    Route::delete('/classes/{id}/schedules/destroy', 'KlassController@schedules_destroy')->name('klass.schedules_destroy');
 
     // Klass > bill
     Route::get('/classes/bills', 'BillController@index')->name('bill');
